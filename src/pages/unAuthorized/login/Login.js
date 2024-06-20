@@ -7,6 +7,7 @@ import { login } from '../../../services/authApi';
 import { useSkin } from "@hooks/useSkin";
 import illustrationsLight from "@src/assets/images/pages/login-v2.svg";
 import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg";
+import './Login.css'
 
 import {
   Row,
@@ -20,6 +21,7 @@ import {
 } from "reactstrap";
 
 import InputPasswordToggle from "@components/input-password-toggle";
+import toast from 'react-hot-toast';
 
 const Login = () => {
   
@@ -39,14 +41,16 @@ const Login = () => {
       //history.push('/dashboard');
     },
     onError: () => {
-      setError('Invalid credentials');
+      //setError('Invalid credentials');
+      toast.error('Invalid credentials')
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      setError('Email and password are required');
+      //setError('Email and password are required');
+      toast.error('Email and password are required')
       return;
     }
     mutation.mutate({ email, password });
@@ -106,7 +110,7 @@ const Login = () => {
               <Button color="primary" block>
                 Sign in
               </Button>
-              {error && <p>{error}</p>}
+              {/* {error && <p className='login-error'>{error}</p>} */}
             </Form>
           </Col>
         </Col>
