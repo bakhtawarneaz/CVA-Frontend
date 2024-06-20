@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://yourapi.com',
+  baseURL: 'https://circle-be.its.com.pk/v1',
   headers: {
     'Content-Type': 'application/json',
   },
