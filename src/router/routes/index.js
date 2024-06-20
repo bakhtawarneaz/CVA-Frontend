@@ -15,6 +15,7 @@ import { isObjEmpty } from "@utils";
 import Organizations from "../../pages/authorized/organizations/Organizations";
 import Brands from "../../pages/authorized/brands/Brands";
 import User from "../../pages/authorized/user/User";
+import Login from "../../pages/unAuthorized/login/Login";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -30,7 +31,7 @@ const DefaultRoute = "/login";
 
 const Home = lazy(() => import("../../views/Home"));
 //const SecondPage = lazy(() => import("../../views/SecondPage"));
-const Login = lazy(() => import("../../views/Login"));
+//const Login = lazy(() => import("../../views/Login"));
 //const Register = lazy(() => import("../../views/Register"));
 //const ForgotPassword = lazy(() => import("../../views/ForgotPassword"));
 //const Error = lazy(() => import("../../views/Error"));
