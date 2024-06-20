@@ -1,4 +1,4 @@
-import { Mail, Home } from "react-feather";
+import { Home, User, Award, Gift} from "react-feather";
 
 export default [
   {
@@ -10,19 +10,19 @@ export default [
   {
     id: "organizations",
     title: "Organizations",
-    icon: <Home size={20} />,
+    icon: <Gift size={20} />,
     navLink: "/organizations",
   },
   {
     id: "brands",
     title: "Brands",
-    icon: <Home size={20} />,
+    icon: <Award size={20} />,
     navLink: "/brands",
   },
   {
     id: "user",
     title: "User",
-    icon: <Home size={20} />,
+    icon: <User size={20} />,
     navLink: "/user",
   },
   
