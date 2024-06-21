@@ -5,7 +5,16 @@ import { Navigate } from "react-router-dom";
 // ** Utils
 import { getUserData, getHomeRouteForLoggedInUser } from "@utils";
 
+import { useSelector } from 'react-redux';
+
 const PublicRoute = ({ children, route }) => {
+
+  const token = useSelector(state => state.token);
+
+  if (token === '') {
+    return <Navigate to={'/login'} />;
+  }
+
   if (route) {
     const user = getUserData();
 

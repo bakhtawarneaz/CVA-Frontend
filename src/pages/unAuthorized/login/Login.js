@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
-import { login as loginAction } from '../../../features/auth/authSlice';
 import { login } from '../../../services/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useSkin } from "@hooks/useSkin";
@@ -30,26 +28,22 @@ const Login = () => {
 
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      dispatch(loginAction(data));
       navigate('/home');
     },
-    onError: () => {
-      //setError('Invalid credentials');
-      toast.error('Invalid credentials')
+    onError: (error) => {
+      toast.error(error.response.data.message)
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      //setError('Email and password are required');
       toast.error('Username and password are required')
       return;
     }
@@ -82,7 +76,7 @@ const Login = () => {
               onSubmit={handleSubmit}
             >
               <div className="mb-1">
-                <Label className="form-label" for="login-username">
+                <Label className="form-label" for="username">
                  User Name
                 </Label>
                 <Input
@@ -96,7 +90,7 @@ const Login = () => {
               </div>
               <div className="mb-1">
                 <div className="d-flex justify-content-between">
-                  <Label className="form-label" for="login-password">
+                  <Label className="form-label" for="password">
                     Password
                   </Label>
                 </div>
@@ -110,7 +104,6 @@ const Login = () => {
               <Button color="primary" block>
                 Sign in
               </Button>
-              {/* {error && <p className='login-error'>{error}</p>} */}
             </Form>
           </Col>
         </Col>

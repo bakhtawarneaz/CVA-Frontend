@@ -8,10 +8,16 @@ import { AbilityContext } from "@src/utility/context/Can";
 // ** Spinner Import
 import Spinner from "../spinner/Loading-spinner";
 
+import { useSelector } from 'react-redux';
+
 const PrivateRoute = ({ children, route }) => {
   // ** Hooks & Vars
   const ability = useContext(AbilityContext);
   const user = JSON.parse(localStorage.getItem("userData"));
+  
+  const token = useSelector(state => state.token);
+  console.log('first',token)
+  
 
   if (route) {
     let action = null;
@@ -23,6 +29,11 @@ const PrivateRoute = ({ children, route }) => {
       resource = route.meta.resource;
       restrictedRoute = route.meta.restricted;
     }
+    
+    if (token) {
+      return <Navigate to="/home"  replace />;
+    }
+
     if (!user) {
       return <Navigate to="/login" />;
     }

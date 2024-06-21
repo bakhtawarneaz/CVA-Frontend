@@ -48,6 +48,8 @@ const Routes = [
     element: <Login />,
     meta: {
       layout: "blank",
+      publicRoute: true,
+      restricted: true
     },
   },
   {
