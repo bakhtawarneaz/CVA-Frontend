@@ -1,25 +1,23 @@
 import api from './axiosConfig';
-import { setToken, login as loginAction } from '../features/auth/authSlice';
-import store from '/src/features/store';
+import { setToken, login as loginAction, setIsAuthenticated } from '../redux/authSlice';
+import {store} from '../redux/store';
 
 export const login = async (credentials) => {
+
     try {
         const response = await api.post('/auth/login', credentials);
         const { data } = response;
-    
-        if (response.status === 200) {
-          const token = data.data.token;
-          const user = data.data.user;
-          store.dispatch(setToken(token));
-          store.dispatch(loginAction(user)); 
-          return data; 
-        } else {
-          console.error('Login failed:', data.message);
-          throw new Error('Login failed'); 
-        }
+
+        if (data?.data?.token && data?.data?.user) {
+          store.dispatch(setIsAuthenticated(true));
+          store.dispatch(setToken(data.data.token));
+          store.dispatch(loginAction(data.data.user));
+      } else {
+          console.error('Invalid response data', data);
+      }
+
       } catch (error) {
         console.error('Login error:', error);
-        throw new Error('Login error'); 
       }
 };
 
